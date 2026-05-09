@@ -1,0 +1,78 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@1571.vb_423c255d6d9">
+  <actions>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@2.2277.v00573e73ddf1"/>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@2.2277.v00573e73ddf1">
+      <jobProperties/>
+      <triggers/>
+      <parameters>
+        <string>RUN_LOGIN</string>
+        <string>RUN_ADDUSER</string>
+      </parameters>
+      <options/>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction>
+  </actions>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.BooleanParameterDefinition>
+          <name>RUN_LOGIN</name>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>RUN_ADDUSER</name>
+          <defaultValue>true</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>登陆</name>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>添加用户</name>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+        <hudson.model.BooleanParameterDefinition>
+          <name>修改用户</name>
+          <defaultValue>false</defaultValue>
+        </hudson.model.BooleanParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@4259.vf653c2b_8a_b_69">
+    <script>pipeline{
+    agent any
+    parameters{
+        booleanParam(name:&apos;RUN_LOGIN&apos;,defaultValue:true)
+        booleanParam(name:&apos;RUN_ADDUSER&apos;,defaultValue:true)
+    }
+    stages{
+        stage(&quot;添加用户&quot;){
+            when { 
+                expression { 
+                    params.RUN_LOGIN==true
+                } 
+            }
+            steps{
+                bat &apos;C:\\Users\\31276\\AppData\\Local\\Programs\\Python\\Python38\\python.exe D:\\Git\\RuoYi\\ruoyi-test\\pythonProject2\\RuoYi\\open_ruoyi4.py&apos;
+            }
+        }
+        stage(&quot;输出&quot;){
+            when { 
+                expression { 
+                    params.RUN_ADDUSER==true
+                } 
+            }
+            steps{
+                bat &apos;C:\\Users\\31276\\AppData\\Local\\Programs\\Python\\Python38\\python.exe D:\\Git\\RuoYi\\ruoyi-test\\pythonProject2\\RuoYi\\open_ruoyi3.py&apos;
+            }
+        }
+        
+    }
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
