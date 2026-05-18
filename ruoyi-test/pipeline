@@ -4,7 +4,6 @@ pipeline{
         booleanParam(name:'RUN_PYTEST_ALLURE',defaultValue:true,description:'运行pytest+allure测试')
     } 
     environment {
-        // 直接在Pipeline中设置JAVA_HOME
         JAVA_HOME = 'D:\\cxdownload\\java'
         PATH = "${JAVA_HOME}\\bin;${env.PATH}"
     }
