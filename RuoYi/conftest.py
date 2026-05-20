@@ -7,9 +7,11 @@ from selenium.webdriver.support.ui import WebDriverWait
 @pytest.fixture(scope="function")
 def driver():
     options = webdriver.ChromeOptions()
+    options.binary_location = r"D:\Google\Chrome\Application\chrome.exe"
     options.add_argument("--start-maximized")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
-    # 指定 ChromeDriver 路径
     service = Service(executable_path=r"D:\ChromeDriver\chromedriver-win64\chromedriver.exe")
 
     driver = webdriver.Chrome(service=service, options=options)
