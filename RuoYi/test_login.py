@@ -154,18 +154,18 @@ def test_login_with_parametrize(driver, wait, user):
     driver.find_element(By.NAME, "username").send_keys(user['username'])
     driver.find_element(By.NAME, 'password').clear()
     driver.find_element(By.NAME, 'password').send_keys(user['password'])
-    
+
     driver.find_element(By.ID, 'btnSubmit').click()
 
     try:
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="side-menu"]/li[3]/a')))
         assert "首页" in driver.title or "若依" in driver.title, f"用户 {user['username']} 登录失败"
         print(f"用户 {user['username']} ({user['nickname']}) 登录成功")
-        
+
         logout_btn = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="logout"]')))
         js_click(driver, logout_btn)
         print(f"用户 {user['username']} 退出成功")
-        
+
     except Exception as e:
         print(f"用户 {user['username']} 登录失败: {str(e)}")
         raise
