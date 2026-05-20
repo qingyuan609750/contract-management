@@ -1,0 +1,22 @@
+[
+  {"username": "admin01", "password": "admin123", "nickname": "管理员01"},
+  {"username": "admin02", "password": "admin123", "nickname": "管理员02"},
+  {"username": "admin03", "password": "admin123", "nickname": "管理员03"},
+  {"username": "user01", "password": "user123", "nickname": "用户01"},
+  {"username": "user02", "password": "user123", "nickname": "用户02"},
+  {"username": "user03", "password": "user123", "nickname": "用户03"},
+  {"username": "user04", "password": "user123", "nickname": "用户04"},
+  {"username": "user05", "password": "user123", "nickname": "用户05"},
+  {"username": "user06", "password": "user123", "nickname": "用户06"},
+  {"username": "user07", "password": "user123", "nickname": "用户07"},
+  {"username": "user08", "password": "user123", "nickname": "用户08"},
+  {"username": "user09", "password": "user123", "nickname": "用户09"},
+  {"username": "user10", "password": "user123", "nickname": "用户10"},
+  {"username": "test01", "password": "test123", "nickname": "测试用户01"},
+  {"username": "test02", "password": "test123", "nickname": "测试用户02"},
+  {"username": "test03", "password": "test123", "nickname": "测试用户03"},
+  {"username": "dev01", "password": "dev123", "nickname": "开发用户01"},
+  {"username": "dev02", "password": "dev123", "nickname": "开发用户02"},
+  {"username": "qa01", "password": "qa123", "nickname": "测试人员01"},
+  {"username": "qa02", "password": "qa123", "nickname": "测试人员02"}
+]
