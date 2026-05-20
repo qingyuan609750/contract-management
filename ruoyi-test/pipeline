@@ -5,12 +5,18 @@ pipeline{
     } 
     environment { 
         JAVA_HOME = 'D:\\cxdownload\\java' 
-        PATH = "${JAVA_HOME}\\bin;${env.PATH}" 
+        PATH = "\\\bin;\" 
     } 
     tools { 
         allure 'allure' 
     } 
     stages{ 
+        stage("拉取最新代码"){ 
+            steps{ 
+                bat 'git fetch origin master' 
+                bat 'git reset --hard origin/master' 
+            } 
+        } 
         stage("安装依赖"){ 
             when { expression { params.RUN_PYTEST_ALLURE==true } } 
             steps{ 
@@ -26,9 +32,9 @@ pipeline{
         stage("生成allure报告"){ 
             when { expression { params.RUN_PYTEST_ALLURE==true } } 
             steps{ 
-                withEnv(["JAVA_HOME=D:\\cxdownload\\java"]) {
-                    allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
-                }
+                withEnv(["JAVA_HOME=D:\\cxdownload\\java"]) { 
+                    allure includeProperties: false, jdk: '', results: [[path: 'allure-results']] 
+                } 
             } 
         } 
     } 
