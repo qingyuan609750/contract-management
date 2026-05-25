@@ -1,0 +1,123 @@
+[
+  {
+    "loginName": "test_user_1779678848_0",
+    "userName": "王琳",
+    "password": "123456",
+    "deptId": 103,
+    "email": "lixiulan@example.org",
+    "phonenumber": "14785921999",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_1",
+    "userName": "王建",
+    "password": "123456",
+    "deptId": 103,
+    "email": "xia69@example.org",
+    "phonenumber": "15993290028",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_2",
+    "userName": "陈波",
+    "password": "123456",
+    "deptId": 103,
+    "email": "xiulancai@example.com",
+    "phonenumber": "15047968796",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_3",
+    "userName": "罗丽华",
+    "password": "123456",
+    "deptId": 103,
+    "email": "xiulanmo@example.com",
+    "phonenumber": "13919705687",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_4",
+    "userName": "曾勇",
+    "password": "123456",
+    "deptId": 103,
+    "email": "yangzou@example.net",
+    "phonenumber": "15173817934",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_5",
+    "userName": "龚勇",
+    "password": "123456",
+    "deptId": 103,
+    "email": "lugang@example.com",
+    "phonenumber": "14726627373",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_6",
+    "userName": "王峰",
+    "password": "123456",
+    "deptId": 103,
+    "email": "kxiong@example.com",
+    "phonenumber": "15536554354",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_7",
+    "userName": "李秀英",
+    "password": "123456",
+    "deptId": 103,
+    "email": "pingdu@example.com",
+    "phonenumber": "15383982913",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_8",
+    "userName": "李红",
+    "password": "123456",
+    "deptId": 103,
+    "email": "ywu@example.com",
+    "phonenumber": "18870680080",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "test_user_1779678848_9",
+    "userName": "单玉兰",
+    "password": "123456",
+    "deptId": 103,
+    "email": "yuyang@example.net",
+    "phonenumber": "15956828750",
+    "expected_code": 0,
+    "expected_message": "操作成功",
+    "test_scenario": "normal"
+  },
+  {
+    "loginName": "admin",
+    "userName": "重复账号",
+    "password": "123456",
+    "deptId": 103,
+    "email": "duplicate@test.com",
+    "phonenumber": "13800138000",
+    "expected_code": 500,
+    "expected_message": "已存在",
+    "test_scenario": "duplicate"
+  }
+]
