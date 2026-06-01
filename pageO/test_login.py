@@ -22,7 +22,7 @@ class TestLogin:
     def login_service(self, driver):
         """初始化 LoginService"""
         service = LoginService(driver)
-        driver.get("http://127.0.0.1/login")
+        driver.get("http://127.0.0.1:8088/login")
         return service
 
     @allure.step("登录测试: {scenario}")
