@@ -27,10 +27,10 @@ class TestAddUser:
         service.login()
         return service
 
-    @allure.step("新增用户测试: {scenario}")
     @pytest.mark.parametrize("test_case", ADD_USER_DATA, ids=lambda x: x['scenario'])
     def test_add_user(self, user_service, test_case):
         """新增用户 - DDT驱动"""
+        allure.dynamic.title(f"新增用户测试: {test_case['scenario']}")
         # 1. 调操作层
         success_msg = user_service.add_user(test_case)
 
@@ -52,10 +52,10 @@ class TestUpdateUser:
         service.login()
         return service
 
-    @allure.step("修改用户测试: {scenario}")
     @pytest.mark.parametrize("test_case", UPDATE_USER_DATA, ids=lambda x: x['scenario'])
     def test_update_user(self, user_service, test_case):
         """修改用户 - DDT驱动"""
+        allure.dynamic.title(f"修改用户测试: {test_case['scenario']}")
         # 1. 调操作层
         success_msg = user_service.edit_first_user(
             test_case['newUserName'],
@@ -81,10 +81,10 @@ class TestDeleteUser:
         service.login()
         return service
 
-    @allure.step("删除用户测试: {scenario}")
     @pytest.mark.parametrize("test_case", DELETE_USER_DATA, ids=lambda x: x['scenario'])
     def test_delete_user(self, user_service, test_case):
         """删除用户 - DDT驱动"""
+        allure.dynamic.title(f"删除用户测试: {test_case['scenario']}")
         # 1. 调操作层
         success_msg = user_service.delete_first_user(test_case['confirm'])
 

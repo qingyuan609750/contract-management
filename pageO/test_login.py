@@ -25,10 +25,10 @@ class TestLogin:
         driver.get("http://127.0.0.1:8088/login")
         return service
 
-    @allure.step("登录测试: {scenario}")
     @pytest.mark.parametrize("test_case", LOGIN_DATA, ids=lambda x: x['scenario'])
     def test_login(self, login_service, test_case):
         """登录测试 - DDT驱动"""
+        allure.dynamic.title(f"登录测试: {test_case['scenario']}")
         # 1. 调操作层
         login_service.login(test_case['username'], test_case['password'])
 
