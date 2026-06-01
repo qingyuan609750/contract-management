@@ -23,7 +23,7 @@ class TestAddUser:
     def user_service(self, driver):
         """初始化 UserService"""
         service = UserService(driver)
-        driver.get("http://localhost/login")
+        driver.get("http://127.0.0.1/login")
         service.login()
         return service
 
@@ -48,7 +48,7 @@ class TestUpdateUser:
     def user_service(self, driver):
         """初始化 UserService"""
         service = UserService(driver)
-        driver.get("http://localhost/login")
+        driver.get("http://127.0.0.1/login")
         service.login()
         return service
 
@@ -77,7 +77,7 @@ class TestDeleteUser:
     def user_service(self, driver):
         """初始化 UserService"""
         service = UserService(driver)
-        driver.get("http://localhost/login")
+        driver.get("http://127.0.0.1/login")
         service.login()
         return service
 
@@ -102,7 +102,7 @@ class TestUserWithFaker:
     def user_service(self, driver):
         """初始化 UserService"""
         service = UserService(driver)
-        driver.get("http://localhost/login")
+        driver.get("http://127.0.0.1/login")
         service.login()
         return service
 

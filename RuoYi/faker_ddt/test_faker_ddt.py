@@ -5,7 +5,7 @@ import allure
 import requests
 from faker import Faker
 
-BASE_URL = 'http://localhost:8088'
+BASE_URL = 'http://127.0.0.1:8088'
 FAKER_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'faker_data')
 
 # 确保数据目录存在
