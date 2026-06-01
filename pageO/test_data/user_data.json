@@ -1,0 +1,71 @@
+{
+  "add_user_cases": [
+    {
+      "scenario": "正常添加用户",
+      "loginName": "test_add_001",
+      "userName": "测试用户1",
+      "email": "test1@example.com",
+      "phonenumber": "13800138001",
+      "password": "123456",
+      "expected": "操作成功"
+    },
+    {
+      "scenario": "添加重复用户",
+      "loginName": "admin",
+      "userName": "重复用户",
+      "email": "dup@example.com",
+      "phonenumber": "13800138002",
+      "password": "123456",
+      "expected": "已存在"
+    },
+    {
+      "scenario": "添加用户-邮箱格式错误",
+      "loginName": "test_add_002",
+      "userName": "测试用户2",
+      "email": "invalid_email",
+      "phonenumber": "13800138003",
+      "password": "123456",
+      "expected": "格式"
+    }
+  ],
+  "update_user_cases": [
+    {
+      "scenario": "正常修改用户",
+      "newUserName": "修改后的用户名",
+      "newEmail": "updated@example.com",
+      "newPhone": "13900139001",
+      "expected": "操作成功"
+    },
+    {
+      "scenario": "修改用户-清空用户名",
+      "newUserName": "",
+      "newEmail": "test@example.com",
+      "newPhone": "13900139002",
+      "expected": "不能为空"
+    },
+    {
+      "scenario": "修改用户-手机号格式错误",
+      "newUserName": "测试用户",
+      "newEmail": "test@example.com",
+      "newPhone": "123",
+      "expected": "格式"
+    }
+  ],
+  "delete_user_cases": [
+    {
+      "scenario": "正常删除用户",
+      "confirm": true,
+      "expected": "操作成功"
+    },
+    {
+      "scenario": "取消删除用户",
+      "confirm": false,
+      "expected": "取消"
+    },
+    {
+      "scenario": "删除不存在的用户",
+      "confirm": true,
+      "expected": "不存在"
+    }
+  ]
+}
