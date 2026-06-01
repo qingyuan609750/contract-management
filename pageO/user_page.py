@@ -52,7 +52,7 @@ class UserPage:
 
     def navigate_to_user_page(self):
         """导航到用户管理页面"""
-        self.driver.find_element(*self.SYSTEM_MENU).click()
+        self.wait.until(EC.element_to_be_clickable(self.SYSTEM_MENU)).click()
         self.wait.until(EC.element_to_be_clickable(self.USER_MENU)).click()
 
     def click_add_user(self):
@@ -62,14 +62,14 @@ class UserPage:
     def fill_user_form(self, login_name: str, user_name: str, email: str, phone: str, password: str = "123456"):
         """填写用户表单"""
         self.wait.until(EC.visibility_of_element_located(self.LOGIN_NAME_INPUT)).send_keys(login_name)
-        self.driver.find_element(*self.USER_NAME_INPUT).send_keys(user_name)
-        self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
-        self.driver.find_element(*self.PHONE_INPUT).send_keys(phone)
-        self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
+        self.wait.until(EC.visibility_of_element_located(self.USER_NAME_INPUT)).send_keys(user_name)
+        self.wait.until(EC.visibility_of_element_located(self.EMAIL_INPUT)).send_keys(email)
+        self.wait.until(EC.visibility_of_element_located(self.PHONE_INPUT)).send_keys(phone)
+        self.wait.until(EC.visibility_of_element_located(self.PASSWORD_INPUT)).send_keys(password)
 
     def submit_form(self):
         """提交表单"""
-        self.driver.find_element(*self.SUBMIT_BUTTON).click()
+        self.wait.until(EC.element_to_be_clickable(self.SUBMIT_BUTTON)).click()
 
     def get_success_message(self) -> str:
         """获取成功提示文字"""
@@ -80,7 +80,7 @@ class UserPage:
         search_input = self.wait.until(EC.visibility_of_element_located(self.SEARCH_INPUT))
         search_input.clear()
         search_input.send_keys(keyword)
-        self.driver.find_element(*self.SEARCH_BUTTON).click()
+        self.wait.until(EC.element_to_be_clickable(self.SEARCH_BUTTON)).click()
 
     def click_edit_first_user(self):
         """点击第一个用户的修改按钮"""
@@ -92,17 +92,17 @@ class UserPage:
         user_name_input.clear()
         user_name_input.send_keys(user_name)
 
-        email_input = self.driver.find_element(*self.EDIT_EMAIL_INPUT)
+        email_input = self.wait.until(EC.visibility_of_element_located(self.EDIT_EMAIL_INPUT))
         email_input.clear()
         email_input.send_keys(email)
 
-        phone_input = self.driver.find_element(*self.EDIT_PHONE_INPUT)
+        phone_input = self.wait.until(EC.visibility_of_element_located(self.EDIT_PHONE_INPUT))
         phone_input.clear()
         phone_input.send_keys(phone)
 
     def submit_edit_form(self):
         """提交修改表单"""
-        self.driver.find_element(*self.EDIT_SUBMIT_BUTTON).click()
+        self.wait.until(EC.element_to_be_clickable(self.EDIT_SUBMIT_BUTTON)).click()
 
     def click_delete_first_user(self):
         """点击第一个用户的删除按钮"""
@@ -122,5 +122,5 @@ class UserPage:
 
     def get_table_rows_count(self) -> int:
         """获取表格行数"""
-        rows = self.driver.find_elements(*self.TABLE_ROWS)
+        rows = self.wait.until(EC.presence_of_all_elements_located(self.TABLE_ROWS))
         return len(rows)

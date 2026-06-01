@@ -1,4 +1,6 @@
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class LoginPage:
@@ -14,15 +16,19 @@ class LoginPage:
 
     def __init__(self, driver):
         self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
 
     def input_username(self, username: str):
         """输入用户名"""
-        self.driver.find_element(*self.USERNAME_INPUT).send_keys(username)
+        element = self.wait.until(EC.presence_of_element_located(self.USERNAME_INPUT))
+        element.send_keys(username)
 
     def input_password(self, password: str):
         """输入密码"""
-        self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
+        element = self.wait.until(EC.presence_of_element_located(self.PASSWORD_INPUT))
+        element.send_keys(password)
 
     def click_login_button(self):
         """点击登录按钮"""
-        self.driver.find_element(*self.LOGIN_BUTTON).click()
+        element = self.wait.until(EC.element_to_be_clickable(self.LOGIN_BUTTON))
+        element.click()
