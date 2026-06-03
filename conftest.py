@@ -1,28 +1,31 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support.ui import WebDriverWait
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def driver():
-    options = Options()
-    options.binary_location = r"D:\Google\Chrome\Application\chrome.exe"
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--disable-infobars")
-    options.add_argument("--window-size=1920,1080")
+    chrome_options = Options()
 
-    service = Service(executable_path=r"D:\Git\RuoYi\ruoyi-test\chromedriver.exe")
-    driver = webdriver.Chrome(service=service, options=options)
-    driver.maximize_window()
+    # Jenkins 运行 UI 自动化必备参数
+    chrome_options.add_argument("--headless=new")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--disable-extensions")
+    chrome_options.add_argument("--window-size=1920,1080")
+    chrome_options.add_argument("--ignore-certificate-errors")
+    chrome_options.add_argument("--allow-running-insecure-content")
+
+    # 禁用 Jenkins 环境中会导致崩溃的选项
+    chrome_options.add_experimental_option("excludeSwitches", ["enable-logging", "enable-automation"])
+    chrome_options.add_experimental_option('useAutomationExtension', False)
+
+    # 启动浏览器
+    driver = webdriver.Chrome(options=chrome_options)
+    driver.implicitly_wait(15)
+    driver.set_page_load_timeout(30)
+
     yield driver
+
     driver.quit()
-
-
-@pytest.fixture(scope="module")
-def wait(driver):
-    return WebDriverWait(driver, 10)
