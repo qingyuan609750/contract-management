@@ -24,18 +24,6 @@ pipeline{
                 bat '"%PYTHON_PATH%" -m pip install pytest allure-pytest requests faker selenium'
             }
         }
-        stage("执行登录测试"){
-            when { expression { params.RUN_PYTEST_ALLURE==true } }
-            steps{
-                bat '"%PYTHON_PATH%" -m pytest pageO/test_login.py -v --alluredir=allure-results/login --clean-alluredir'
-            }
-        }
-        stage("执行用户管理测试"){
-            when { expression { params.RUN_PYTEST_ALLURE==true } }
-            steps{
-                bat '"%PYTHON_PATH%" -m pytest pageO/test_user_ui.py -v --alluredir=allure-results/user --clean-alluredir'
-            }
-        }
         stage("执行faker_ddt接口测试"){
             when { expression { params.RUN_PYTEST_ALLURE==true } }
             steps{
@@ -47,8 +35,6 @@ pipeline{
             steps{
                 withEnv(["JAVA_HOME=D:/cxdownload/java"]) {
                     allure includeProperties: false, jdk: '', results: [
-                        [path: 'allure-results/login'],
-                        [path: 'allure-results/user'],
                         [path: 'allure-results/faker']
                     ]
                 }
