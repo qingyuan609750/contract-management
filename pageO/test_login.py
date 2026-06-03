@@ -29,12 +29,25 @@ class TestLogin:
     def test_login(self, login_service, test_case):
         """登录测试 - DDT驱动"""
         allure.dynamic.title(f"登录测试: {test_case['scenario']}")
-        # 1. 调操作层
-        login_service.login(test_case['username'], test_case['password'])
 
-        # 2. 取结果
-        page_source = login_service.login_page.driver.page_source
+        with allure.step(f"步骤1: 执行登录操作 (用户名: {test_case['username']})"):
+            login_service.login(test_case['username'], test_case['password'])
+            allure.attach(
+                f"用户名: {test_case['username']}\n密码: ********",
+                name="登录凭证",
+                attachment_type=allure.attachment_type.TEXT
+            )
 
-        # 3. 断言
-        assert test_case['expected'] in page_source, \
-            f"{test_case['description']}: 期望包含'{test_case['expected']}', 实际未找到"
+        with allure.step("步骤2: 获取页面结果"):
+            page_source = login_service.login_page.driver.page_source
+            allure.attach(page_source, name="页面源码", attachment_type=allure.attachment_type.HTML)
+
+        with allure.step(f"步骤3: 断言页面包含预期文本: {test_case['expected']}"):
+            result = test_case['expected'] in page_source
+            allure.attach(
+                f"预期包含: {test_case['expected']}\n实际结果: {'通过' if result else '未通过'}",
+                name="断言详情",
+                attachment_type=allure.attachment_type.TEXT
+            )
+            assert result, \
+                f"{test_case['description']}: 期望包含'{test_case['expected']}', 实际未找到"
