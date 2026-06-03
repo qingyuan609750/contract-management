@@ -22,7 +22,7 @@ class TestLogin:
     def login_service(self, driver):
         """初始化 LoginService"""
         service = LoginService(driver)
-        driver.get("http://localhost:8088/login")
+        driver.get("http://127.0.0.1:8088/login")
         return service
 
     @pytest.mark.parametrize("test_case", LOGIN_DATA, ids=lambda x: x['scenario'])

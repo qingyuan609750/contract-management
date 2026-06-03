@@ -6,15 +6,22 @@ from selenium.webdriver.chrome.options import Options
 
 @pytest.fixture(scope="function")
 def driver():
-    """初始化浏览器 - 指定Chrome浏览器和驱动路径"""
-    options = Options()
-    # 指定Chrome浏览器可执行文件路径（Jenkins环境必需）
-    options.binary_location = r"D:\Google\Chrome\Application\chrome.exe"
-
+    """初始化浏览器 - Jenkins无桌面环境配置"""
     service = Service(executable_path=r"D:\ChromeDriver\chromedriver-win64\chromedriver.exe")
-    driver = webdriver.Chrome(service=service, options=options)
+
+    chrome_options = Options()
+    # 关键：Jenkins 必须用无头模式
+    chrome_options.add_argument("--headless=new")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--window-size=1920,1080")
+
+    # 指定浏览器路径
+    chrome_options.binary_location = r"D:\Google\Chrome\Application\chrome.exe"
+
+    driver = webdriver.Chrome(service=service, options=chrome_options)
     driver.maximize_window()
     driver.implicitly_wait(10)
-
     yield driver
     driver.quit()
