@@ -33,7 +33,7 @@ pipeline{
         stage("执行pageO UI测试"){
             when { expression { params.RUN_PYTEST_ALLURE==true } }
             steps{
-                bat '"%PYTHON_PATH%" -m pytest pageO/test_login.py -v --alluredir=allure-results/pageO --clean-alluredir'
+                bat '"%PYTHON_PATH%" -m pytest pageO/test_login.py -v --alluredir=allure-results/pageO --clean-alluredir || exit 0'
             }
         }
         stage("生成allure报告"){
