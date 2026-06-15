@@ -254,6 +254,12 @@ router.post('/change-password', (req: Request, res: Response) => {
 })
 
 export function authMiddleware(req: Request, res: Response, next: Function) {
+  // 放行前端静态文件和页面路由（非 API 请求）
+  if (!req.path.startsWith('/api')) {
+    next()
+    return
+  }
+
   // Public paths that don't require authentication
   const publicPaths = ['/api/auth/login', '/api/health']
   if (publicPaths.includes(req.path)) {
