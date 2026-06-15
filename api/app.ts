@@ -33,11 +33,9 @@ app.use('/api/health', (req: Request, res: Response, next: NextFunction): void =
   res.status(200).json({ success: true, message: 'ok' })
 })
 
-// Auth routes - login and me are handled in authRoutes with their own auth checks
-app.use('/api/auth', authRoutes)
-
-// Protected API routes
+// Protected API routes (authMiddleware runs before authRoutes so /api/auth/change-password etc. work)
 app.use(authMiddleware)
+app.use('/api/auth', authRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/contracts', contractRoutes)
 app.use('/api/reminders', reminderRoutes)
