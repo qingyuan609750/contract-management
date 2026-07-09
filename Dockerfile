@@ -1,5 +1,8 @@
-# Build stage for frontend
+# Build stage for frontend and backend
 FROM node:20-alpine AS builder
+
+# Install build tools for better-sqlite3 (python3, make, g++)
+RUN apk add --no-cache python3 make g++ sqlite-dev
 
 WORKDIR /app
 
@@ -14,6 +17,9 @@ RUN npm run build:all
 # Production stage
 FROM node:20-alpine
 
+# Install runtime dependencies for better-sqlite3
+RUN apk add --no-cache sqlite-libs
+
 WORKDIR /app
 
 # Copy built assets
@@ -22,8 +28,8 @@ COPY --from=builder /app/api/dist ./api/dist
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/package-lock.json* ./
 
-# Install production dependencies only
-RUN npm ci --omit=dev
+# Copy node_modules with compiled native modules
+COPY --from=builder /app/node_modules ./node_modules
 
 # Create data directory for SQLite
 RUN mkdir -p /data
