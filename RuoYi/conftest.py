@@ -1,0 +1,25 @@
+import pytest
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+
+
+@pytest.fixture(scope="function")
+def driver():
+    options = webdriver.ChromeOptions()
+    options.binary_location = r"D:\Google\Chrome\Application\chrome.exe"
+    options.add_argument("--start-maximized")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    service = Service(executable_path=r"D:\ChromeDriver\chromedriver-win64\chromedriver.exe")
+
+    driver = webdriver.Chrome(service=service, options=options)
+
+    yield driver
+    driver.quit()
+
+
+@pytest.fixture(scope="function")
+def wait(driver):
+    return WebDriverWait(driver, 10)

@@ -1,0 +1,60 @@
+pipeline{
+    agent any
+    parameters{
+        booleanParam(name:'RUN_PYTEST_ALLURE',defaultValue:true,description:'运行pytest+allure测试')
+    }
+    environment {
+        JAVA_HOME = 'D:/cxdownload/java'
+        PATH = "${JAVA_HOME}/bin;${env.PATH}"
+        PYTHON_PATH = 'C:/Users/31276/AppData/Local/Programs/Python/Python310/python.exe'
+    }
+    tools {
+        allure 'allure'
+    }
+    stages{
+        stage("拉取最新代码"){
+            steps{
+                bat 'git fetch origin master'
+                bat 'git reset --hard origin/master'
+            }
+        }
+        stage("安装依赖"){
+            when { expression { params.RUN_PYTEST_ALLURE==true } }
+            steps{
+                bat '"%PYTHON_PATH%" -m pip install pytest allure-pytest requests faker selenium'
+            }
+        }
+        stage("执行faker_ddt接口测试"){
+            when { expression { params.RUN_PYTEST_ALLURE==true } }
+            steps{
+                bat '"%PYTHON_PATH%" -m pytest RuoYi/faker_ddt/test_faker_ddt.py -v --alluredir=allure-results/faker --clean-alluredir'
+            }
+        }
+        stage("执行pageO UI测试"){
+            when { expression { params.RUN_PYTEST_ALLURE==true } }
+            steps{
+                bat '"%PYTHON_PATH%" -m pytest pageO/test_login.py -v --alluredir=allure-results/pageO --clean-alluredir'
+            }
+        }
+        stage("生成allure报告"){
+            when { expression { params.RUN_PYTEST_ALLURE==true } }
+            steps{
+                withEnv(["JAVA_HOME=D:/cxdownload/java"]) {
+                    allure includeProperties: false, jdk: '', results: [
+                        [path: 'allure-results/faker'],
+                        [path: 'allure-results/pageO']
+                    ]
+                }
+            }
+        }
+    }
+    post {
+        always {
+            bat 'echo 测试完成'
+            archiveArtifacts artifacts: 'pageO/logs/test.log', allowEmptyArchive: true
+        }
+        failure {
+            bat 'echo 测试失败，请检查日志'
+        }
+    }
+}

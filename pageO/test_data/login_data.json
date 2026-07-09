@@ -1,0 +1,25 @@
+{
+  "login_cases": [
+    {
+      "scenario": "正常登录",
+      "username": "admin",
+      "password": "admin123",
+      "expected": "欢迎",
+      "description": "使用正确的用户名和密码登录"
+    },
+    {
+      "scenario": "错误密码",
+      "username": "admin",
+      "password": "wrong_password",
+      "expected": "错误",
+      "description": "使用错误的密码登录"
+    },
+    {
+      "scenario": "空用户名",
+      "username": "",
+      "password": "admin123",
+      "expected": "请输入",
+      "description": "用户名为空"
+    }
+  ]
+}
