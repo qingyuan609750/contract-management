@@ -1,46 +1,25 @@
-######################################################################
-# Build Tools
-
-.gradle
-/build/
-!gradle/wrapper/gradle-wrapper.jar
-
-target/
-!.mvn/wrapper/maven-wrapper.jar
-
-######################################################################
-# IDE
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-
-### JRebel ###
-rebel.xml
-### NetBeans ###
-nbproject/private/
-build/*
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
-
-######################################################################
-# Others
+# Logs
+logs
 *.log
-*.xml.versionsBackup
-*.swp
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-!*/build/*.java
-!*/build/*.html
-!*/build/*.xml
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vite
